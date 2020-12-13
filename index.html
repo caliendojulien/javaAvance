@@ -1,40 +1,170 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Java avancé</title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>Java avancé</h1>
+            <h3>RIL - CESi</h3>
+        </section>
+        <section data-auto-animate>
+            <h3>Programme</h3>
+            <hr>
+            <p>
+                <img width="25%" src="https://upload.wikimedia.org/wikipedia/uk/7/70/Spring_Framework.png">
+            </p>
+            <div class="row">
+                <div class="col">
+                    <ul>
+                        <li class="fragment fade-up fade-in-then-semi-out">Présentation</li>
+                        <li class="fragment fade-up fade-in-then-semi-out">Gradle</li>
+                        <li class="fragment fade-up fade-in-then-semi-out">JPA</li>
+                        <li class="fragment fade-up fade-in-then-semi-out">Spring CORE</li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <ul>
+                        <li class="fragment fade-up fade-in-then-semi-out">Spring JDBC</li>
+                        <li class="fragment fade-up fade-in-then-semi-out">Spring ORM</li>
+                        <li class="fragment fade-up fade-in-then-semi-out">Spring MVC</li>
+                        <li class="fragment fade-up fade-in-then-semi-out">Spring BOOT</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section>
+            <section>
+                <h3>Présentation</h3>
+            </section>
+            <section>
+                <h4>un framework ? Pourquoi faire ?</h4>
+                <ul>
+                    <li class="fragment">Uniformiser le travail des développeurs</li>
+                    <li class="fragment">Réduire le temps de développement</li>
+                    <li class="fragment">Réduire les coûts de développement</li>
+                    <li class="fragment">Rendre la solution prérenne</li>
+                    <li class="fragment">Avoir l'appui d'une énorme communautée</li>
+                </ul>
+            </section>
+            <section data-background-image="https://media.giphy.com/media/M8zfZXu3z7OnDY9grz/source.gif">
+                <h4>un framework ? Pourquoi faire ?</h4>
+                <ul>
+                    <li>Uniformiser le travail des développeurs</li>
+                    <li>Réduire le temps de développement</li>
+                    <li>Réduire les coûts de développement</li>
+                    <li>Rendre la solution prérenne</li>
+                    <li>Avoir l'appui d'une énorme communautée</li>
+                </ul>
+            </section>
+            <section>
+                <h4>Architecture</h4>
+                <p>Une application va être découpée en 3 couches</p>
+                <ul>
+                    <li>La couche présentation</li>
+                    <li>La couche métier</li>
+                    <li>La couche données</li>
+                </ul>
+            </section>
+            <section>
+                <h4>Framework Web</h4>
+                <p>Un framework web respecte le design pattern MVC (Model View Controler)</p>
+            </section>
+            <section>
+                <h4>Quelques frameworks web</h4>
+                <ul>
+                    <li>JSF</li>
+                    <li>Struts</li>
+                    <li>Spring MVC</li>
+                </ul>
+            </section>
+            <section>
+                <h4>Quelques framework de persistance des données</h4>
+                <div class="row">
+                    <div class="col">
+                        <ul>
+                            <li><img src="https://hibernate.org/images/hibernate-logo.svg" width="33%"></li>
+                            <li><img src="https://www.eclipse.org/eclipselink/images/logo.png" width="33%"></li>
+                            <li><img
+                                    src="https://dimitr.im/static/8f8361cc803cd49880a20b0075d60813/c6a2b/spring-data.png"
+                                    width="15%"></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section data-auto-animate>
+                <h4>Spring framework</h4>
+                <p>Spring est le leader sur le marché des framework Java</p>
+                <div data-id="logoSpring">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Spring_Framework_Logo_2018.svg/langfr-1920px-Spring_Framework_Logo_2018.svg.png">
+                </div>
+            </section>
+            <section data-auto-animate>
+                <div class="row">
+                    <div class="col">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Spring_Framework_Logo_2018.svg/langfr-1920px-Spring_Framework_Logo_2018.svg.png"
+                             width="15%">
+                    </div>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        <ul>
+                            <li>Créé en 2004 par Rod Johnson</li>
+                            <li>Prend en charge la création et la mise en relation d'objets grâce à des fichiers de
+                                configuration
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul>
+                            <li>Permet la création :</li>
+                            <ul>
+                                <li>D'applications web</li>
+                                <li>De micro services</li>
+                                <li>De batchs</li>
+                                <li>D'applications console</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <p>Spring est sécurisé, rapide et accroit la productivité</p>
+                </div>
+    </div>
+    </section>
+    </section>
+</div>
+</div>
 
-		<title>reveal.js</title>
+<script src="dist/reveal.js"></script>
+<script src="plugin/notes/notes.js"></script>
+<script src="plugin/markdown/markdown.js"></script>
+<script src="plugin/highlight/highlight.js"></script>
+<script>
+    // More info about initialization & config:
+    // - https://revealjs.com/initialization/
+    // - https://revealjs.com/config/
+    Reveal.initialize({
+        hash: true,
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
-
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
-
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
-
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+    });
+</script>
+</body>
 </html>
