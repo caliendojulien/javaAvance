@@ -6,7 +6,7 @@
     <title>Java avancé</title>
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
-    <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="dist/theme/solarized.css" id="theme">
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -30,20 +30,16 @@
             </p>
             <div class="row">
                 <div class="col">
-                    <ul>
-                        <li class="fragment fade-up fade-in-then-semi-out">Présentation</li>
-                        <li class="fragment fade-up fade-in-then-semi-out">Gradle</li>
-                        <li class="fragment fade-up fade-in-then-semi-out">JPA</li>
-                        <li class="fragment fade-up fade-in-then-semi-out">Spring CORE</li>
-                    </ul>
+                    <h5 class="fragment fade-up fade-in-then-semi-out">Présentation</h5>
+                    <h5 class="fragment fade-up fade-in-then-semi-out">Gradle</h5>
+                    <h5 class="fragment fade-up fade-in-then-semi-out">JPA</h5>
+                    <h5 class="fragment fade-up fade-in-then-semi-out">Spring CORE</h5>
                 </div>
                 <div class="col">
-                    <ul>
-                        <li class="fragment fade-up fade-in-then-semi-out">Spring JDBC</li>
-                        <li class="fragment fade-up fade-in-then-semi-out">Spring ORM</li>
-                        <li class="fragment fade-up fade-in-then-semi-out">Spring MVC</li>
-                        <li class="fragment fade-up fade-in-then-semi-out">Spring BOOT</li>
-                    </ul>
+                    <h5 class="fragment fade-up fade-in-then-semi-out">Spring JDBC</h5>
+                    <h5 class="fragment fade-up fade-in-then-semi-out">Spring ORM</h5>
+                    <h5 class="fragment fade-up fade-in-then-semi-out">Spring MVC</h5>
+                    <h5 class="fragment fade-up fade-in-then-semi-out">Spring BOOT</h5>
                 </div>
             </div>
         </section>
@@ -73,7 +69,7 @@
             </section>
             <section>
                 <h4>Architecture</h4>
-                <p>Une application va être découpée en 3 couches</p>
+                <h5>Une application va être découpée en 3 couches</h5>
                 <ul>
                     <li>La couche présentation</li>
                     <li>La couche métier</li>
@@ -150,8 +146,8 @@
         <section>
             <section><h3>Gradle</h3></section>
             <section>
-                <p>Gradle est un moteur de production qui permet l'automatisation des actions nécessaire à la mise en
-                    place et l'exploitation d'une application à partir des fichiers sources.</p>
+                <h5>Gradle est un moteur de production qui permet l'automatisation des actions nécessaire à la mise en
+                    place et l'exploitation d'une application à partir des fichiers sources.</h5>
                 <ul>
                     <li>Apache Ant</li>
                     <li>Maven</li>
@@ -161,7 +157,7 @@
             <section>
                 <img src="https://upload.wikimedia.org/wikipedia/fr/e/ed/Gradle_Logo.png">
                 <hr>
-                <p>Gradle est capable de récupérer des dépendances à partir :</p>
+                <h5>Gradle est capable de récupérer des dépendances à partir :</h5>
                 <ul>
                     <li>des dépôts Maven</li>
                     <li>Ivy</li>
@@ -170,9 +166,9 @@
                 </ul>
             </section>
             <section>
-                <p>Gradle est basé sur Groovy</p>
+                <h4>Gradle est basé sur Groovy</h4>
                 <img src="https://blog.knoldus.com/wp-content/uploads/2018/01/1200px-Groovy-logo.svg_.png">
-                <p>Il gère la compilation , les tests, la génération des jar et/ou war et le déploiement</p>
+                <h5>Il gère la compilation , les tests, la génération des jar et/ou war et le déploiement</h5>
             </section>
             <section>
                 <div class="row">
@@ -197,24 +193,226 @@
                     <li>gradlew.bat</li>
                 </ul>
             </section>
+            <section>
+                <h4>plugins</h4>
+                <h5>https://plugins.gradle.org/</h5>
+                <pre class="fragment"><code>plugins {
+    id 'application'
+}
+repositories {
+    jcenter()
+}
+dependencies {
+    testImplementation 'junit:junit:4.13'
+    implementation 'com.google.guava:guava:29.0-jre'
+}
+application {
+    mainClass = 'fr.cesi.App'
+}</code></pre>
+            </section>
+            <section>
+                <h5>L'ajout d'un plugin ajoute des tâches supplémentaires à Gradle</h5>
+                <ul>
+                    <li>assemble</li>
+                    <li>build</li>
+                    <li>clean</li>
+                    <li>jar</li>
+                    <li>...</li>
+                </ul>
+            </section>
+            <section>
+                <div class="row">
+                    <h4>IntelliJ</h4>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/IntelliJ_IDEA_Logo.svg/1200px-IntelliJ_IDEA_Logo.svg.png">
+                    </div>
+                    <div class="col">
+                        <h5>Bien entendu, Gradle est intégré à IntelliJ</h5>
+                        <img src="img/intelliJgradle.PNG">
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <h4>TP</h4>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <img src="https://media.giphy.com/media/3oriO7A7bt1wsEP4cw/giphy.gif">
+                    </div>
+                    <div class="col">
+                        <h6>- Créer une application JavaEE</h6>
+                        <h6>- Ajouter le plugin gretty</h6>
+                        <h6>- Créer un dossier webapp dans le dossier "src/main/" et ajoutez y un fichier
+                            index.html</h6>
+                        <h6>- En utilisant Bootstrap, afficher la liste des 5 meilleurs films de tout les temps
+                            (gladiator doit en faire parti ^^)</h6>
+                        <h6>- Utiliser la commande gradle adéquate pour lancer un serveur Tomcat contenant l'application
+                            créé</h6>
+                    </div>
+                </div>
+                <hr>
+            </section>
+        </section>
+        <section>
+            <section><h3>JPA (Java Persistence API)</h3></section>
+            <section>
+                <h4>Pourquoi JPA ?</h4>
+                <ul>
+                    <li>Java est orienté objet</li>
+                    <li>Les bases de données sont relationnelles</li>
+                </ul>
+                <p>Un ORM permet de faire correspondre un objet Java à une base de donnée relationnelle</p>
+            </section>
+            <section>
+                <p>Les annotations vont faire correspondre : <br>
+                    - une classe avec une table <br>
+                    - un attribut avec une colonne</p>
+                <img src="https://i.stack.imgur.com/CqODs.png">
+            </section>
+            <section data-auto-animate>
+                <pre data-id="code"><code data-trim data-line-numbers>package fr.cesi;
+public class Avengers {
+    private int id;
+    private String nom;
+    private String prenom;
+    private int taille;
+}
+                </code></pre>
+            </section>
+            <section data-auto-animate>
+                <pre data-id="code"><code data-trim data-line-numbers>package fr.cesi;
+import javax.persistence.*;
+@Entity
+@Table(name = "laTableDesAvengers")
+public class Avengers {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private int id;
+    @Column(name = "leNomDeLaColonne")
+    private String nom;
+    private String prenom;
+    @Transient
+    private int taille;
+}
+                </code></pre>
+            </section>
+            <section>
+                <div class="row"><p> ressources/META-INF/persistence.xml</p>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-9">
+                <pre><code data-trim data-line-numbers><persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+                                                                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                                                    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+                                                                    version="2.1">
+    <persistence-unit name="cesiBDD" transaction-type="RESOURCE_LOCAL">
+        <class>fr.cesi.MonPojo</class>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/> <!-- DB Driver -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/cesi"/> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.user" value="postgres"/> <!-- DB User -->
+            <property name="javax.persistence.jdbc.password" value="azerty,123"/> <!-- DB Password -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL82Dialect"/> <!-- DB Dialect -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- create / create-drop / update -->
+            <property name="hibernate.show_sql" value="true"/> <!-- Show SQL in console -->
+            <property name="hibernate.format_sql" value="true"/> <!-- Show SQL formatted -->
+        </properties>
+    </persistence-unit>
+                </persistence></code></pre>
+                    </div>
+                    <div class="col-3 fragment">
+                        <img src="https://media.giphy.com/media/xTiIzoyw4Yh3mRM5DG/giphy.gif" alt="">
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h4>Relations et cardinalité</h4>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        <ul>
+                            <li>One to one</li>
+                            <li>One to many</li>
+                            <li>Many to one</li>
+                            <li>Many to many</li>
+                        </ul>
+                    </div>
+                    <div class="col"><img src="https://dev.mysql.com/doc/sakila/en/images/sakila-schema.png" alt="">
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h4>Java Persistence Query Language</h4>
+                <p>JPQL permet de faire des requêtes sur une base de données en utilisant les objets Java.</p>
+            </section>
+            <section>
+                <p>Les requêtes nommées définies à l'interieur d'une classe Java</p>
+                <pre><code data-trim data-line-numbers>@NamedQueries({
+    @NamedQuery(name="touslespokemons", query="SELECT nom FROM pokemon"),
+    @NamedQuery(name="unpokemon", query="SELECT nom FROM pokemon where nom = :nom")
+})
+                </code></pre>
+                <p>Utilisées ensuite dans l'application</p>
+                <pre><code data-trim data-line-numbers>TypedQuery<Pokemon> requete = em.createNamedQuery("touslespokemons", Pokemon.class);
+System.out.println(requete.getResultList());</code></pre>
+            </section>
+            <section>
+                <p>Les requêtes dynamiques</p>
+                <pre><code data-trim data-line-numbers>Query requete = em.createQuery("Select nom FROM Pokemon WHERE nom ='Pikachu'");
+Pokemon p = requete.getSingleResult();
+                </code></pre>
+                <pre><code data-trim data-line-numbers>Query requete = em.createQuery("Select nom FROM Pokemon WHERE nom =:nom");
+requete.setParameter("nom", "Pikachu");
+Pokemon p = requete.getSingleResult();
+                </code></pre>
+            </section>
+            <section>
+                <div class="row">
+                    <h4>TP</h4>
+                </div>
+                <hr>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        <img src="https://media.giphy.com/media/toXKzaJP3WIgM/giphy.gif">
+                    </div>
+                    <div class="col">
+                        <h6>- Créer une application Java avec Gradle</h6>
+                        <h6>- Ajouter une dépendance à hibernate et à pgSQL</h6>
+                        <h6>- Proposer un menu permettant l'ajout, le tri, la suppression et la recherche de Pokemon en
+                            base de données</h6>
+                        <h6>- Respecter l'architecture suivante : <img src="img/tp02.PNG"></h6>
+                    </div>
+                </div>
+                <hr>
+            </section>
         </section>
     </div>
 </div>
 
 <script src="dist/reveal.js"></script>
+<script src="plugin/zoom/zoom.js"></script>
 <script src="plugin/notes/notes.js"></script>
+<script src="plugin/search/search.js"></script>
 <script src="plugin/markdown/markdown.js"></script>
 <script src="plugin/highlight/highlight.js"></script>
 <script>
-    // More info about initialization & config:
-    // - https://revealjs.com/initialization/
-    // - https://revealjs.com/config/
+
+    // Also available as an ES module, see:
+    // https://revealjs.com/initialization/
     Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
         hash: true,
 
         // Learn about plugins: https://revealjs.com/plugins/
-        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+        plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
     });
+
 </script>
 </body>
 </html>
