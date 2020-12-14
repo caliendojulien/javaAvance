@@ -33,11 +33,6 @@
                     <h5 class="fragment fade-up fade-in-then-semi-out">Présentation</h5>
                     <h5 class="fragment fade-up fade-in-then-semi-out">Gradle</h5>
                     <h5 class="fragment fade-up fade-in-then-semi-out">JPA</h5>
-                    <h5 class="fragment fade-up fade-in-then-semi-out">Spring CORE</h5>
-                </div>
-                <div class="col">
-                    <h5 class="fragment fade-up fade-in-then-semi-out">Spring JDBC</h5>
-                    <h5 class="fragment fade-up fade-in-then-semi-out">Spring ORM</h5>
                     <h5 class="fragment fade-up fade-in-then-semi-out">Spring MVC</h5>
                     <h5 class="fragment fade-up fade-in-then-semi-out">Spring BOOT</h5>
                 </div>
@@ -331,21 +326,6 @@ public class Avengers {
                 </div>
             </section>
             <section>
-                <h4>Relations et cardinalité</h4>
-                <div class="row justify-content-center align-items-center">
-                    <div class="col">
-                        <ul>
-                            <li>One to one</li>
-                            <li>One to many</li>
-                            <li>Many to one</li>
-                            <li>Many to many</li>
-                        </ul>
-                    </div>
-                    <div class="col"><img src="https://dev.mysql.com/doc/sakila/en/images/sakila-schema.png" alt="">
-                    </div>
-                </div>
-            </section>
-            <section>
                 <h4>Java Persistence Query Language</h4>
                 <p>JPQL permet de faire des requêtes sur une base de données en utilisant les objets Java.</p>
             </section>
@@ -388,6 +368,253 @@ Pokemon p = requete.getSingleResult();
                     </div>
                 </div>
                 <hr>
+            </section>
+            <section>
+                <h4>Relations et cardinalité</h4>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        <ul>
+                            <li>One to one</li>
+                            <li>One to many</li>
+                            <li>Many to one</li>
+                            <li>Many to many</li>
+                        </ul>
+                    </div>
+                    <div class="col"><img src="https://dev.mysql.com/doc/sakila/en/images/sakila-schema.png" alt="">
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <h4>TP</h4>
+                </div>
+                <hr>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        <img src="https://media.giphy.com/media/rAm0u2k17rM3e/giphy.gif">
+                    </div>
+                    <div class="col">
+                        <h6>En reprenant l'application précédente</h6>
+                        <h6>- Ajouter un bean Dresseur</h6>
+                        <h6>- Créer une liaison bidirectionelle. Un dresseur peut avoir plusieurs Pokemons. Un Pokemon
+                            n'a qu'un et un seul dresseur</h6>
+                    </div>
+                </div>
+                <hr>
+            </section>
+        </section>
+        <section>
+            <section><h3>Spring ORM</h3></section>
+            <section>
+                <p>Spring ORM est défini par des fichiers de configuration XML</p>
+                <ul>
+                    <li>datasource.properties</li>
+                    <li>ApplicationContext.xml</li>
+                </ul>
+            </section>
+            <section>
+                <h4>datasource.properties va contenir tout les informations de connexion de la base de données</h4>
+                <pre><code data-trim data-line-numbers>driver=org.postgresql.Driver
+url=jdbc:postgresql://localhost/spring_orm
+user=postgres
+pass=azerty</code></pre>
+                <img src="https://media.giphy.com/media/TL5XQpSpASo4U/giphy.gif">
+            </section>
+            <section>
+                <p>ApplicationContext.xml va, lui, définir tous les beans nécessaires à l'application</p>
+                <ul>
+                    <li>La source de donnée</li>
+                    <li>L'usine à DAO</li>
+                    <li>Le manager</li>
+                </ul>
+            </section>
+            <section>
+                <h4>datasource</h4>
+                <pre><code data-trim data-line-numbers="|1|2|3-7"><context:property-placeholder
+                        location="classpath:/database.properties"></context:property-placeholder>
+<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+   <property name="driverClassName" value="${driver}"></property>
+   <property name="url" value="${url}"></property>
+   <property name="username" value="${user}"></property>
+   <property name="password" value="${pass}"></property>
+   <property name="initialSize" value="5"></property>
+</bean>
+                </code></pre>
+            </section>
+            <section>
+                <h4>L'usine</h4>
+                <pre><code data-trim data-line-numbers><bean id="emf"
+                                                             class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+<property name="packagesToScan">
+   <list>
+      <value>fr.cesi.bean</value>
+   </list>
+ </property>
+ <property name="dataSource" ref="dataSource"></property>
+ <property name="jpaVendorAdapter">
+    <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+      <property name="showSql" value="true"></property>
+      <property name="database" value="POSTGRESQL"></property>
+    </bean>
+ </property>
+ <property name="jpaProperties">
+   <props>
+      <prop key="hibernate.hbm2ddl.auto">create</prop>
+   </props>
+ </property>
+</bean>
+                </code></pre>
+            </section>
+            <section>
+                <h4>Le manageur</h4>
+                <pre><code data-trim data-line-numbers><bean id="transactionManager"
+                                                             class="org.springframework.orm.jpa.JpaTransactionManager">
+   <property name="entityManagerFactory" ref="emf"></property>
+</bean>
+<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven></code></pre>
+            </section>
+            <section>
+                <h4>DAO</h4>
+                <p>Il est alors tout a fait possible d'injecter directement une instance de l'EntityManager dans ma
+                    classe Java</p>
+                <pre><code data-trim data-line-numbers>@Repository
+   public class MonDAO {
+      @PersistenceContext
+      EntityManager em;
+}                </code></pre>
+            </section>
+            <section>
+                <p>Et l'utiliser dans les méthodes</p>
+                <pre><code data-trim data-line-numbers>@Transactional
+public void ajouter(Pokemon p) {
+   em.persist(p);
+}</code></pre>
+                <p class="fragment">Lorsqu'une méthode réalise un transaction SQL alors l'annotation @Transactional est
+                    obligatoire</p>
+            </section>
+            <section>
+                <div class="row">
+                    <h4>TP</h4>
+                </div>
+                <hr>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        <img src="https://media.giphy.com/media/hOzfvZynn9AK4/giphy.gif">
+                    </div>
+                    <div class="col">
+                        <h5>En utilisant l'application développé précédemment :</h5>
+                        <h6>- Utiliser Spring ORM pour réaliser l'ensemble des requêtes SQL</h6>
+                        <h6>- Proposer une interface web en ajoutant le plugins Gretty et War</h6>
+                    </div>
+                </div>
+                <hr>
+            </section>
+            <section>
+                <h4>Mieux encore, Spring Data permet <b class="fragment highlight-red">de ne plus écrire</b> les méthodes du CRUD et les méthodes les
+                    plus utilisées d'une application classique</h4>
+                <pre class="fragment"><code>public class MonDAO extends JpaRepository&#x3008;Pokemon, Integer&#x3009;{
+}</code></pre>
+            </section>
+        </section>
+        <section>
+            <section><h3>Spring MVC</h3></section>
+            <section>
+                <p>MVC (Model View Controler) est un patron de conception très utilisé en développement d'interface
+                    graphique</p>
+                <p>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col">
+                        <ul>
+                            <h4>Le modèle contient les données</h4>
+                            <h4>La vue est la partie visible de l'iceberg</h4>
+                            <h4>Le controleur est la logique de l'application </h4>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/MVC-Process.svg/1200px-MVC-Process.svg.png"
+                             alt="">
+                    </div>
+                </div>
+            </section>
+            <section>
+                Spring utilise un controleur frontal qui va "dispatcher", aux différents autres controleurs, les
+                demandes utilisateurs.<br>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-3">
+                        <img src="https://media.giphy.com/media/1oEttHTW7Dh6WFabZd/giphy.gif" alt=""></div>
+                </div>
+                Il est déclaré dans le fichier web.xml
+            </section>
+            <section>
+                <pre><code data-trim data-line-numbers><servlet>
+   <servlet-name>dispatcher</servlet-name>
+   <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+   <load-on-startup>1</load-on-startup>
+</servlet>
+<servlet-mapping>
+   <servlet-name>dispatcher</servlet-name>
+   <url-pattern>/app/*</url-pattern>
+</servlet-mapping></code></pre>
+            </section>
+            <section>
+                <pre><code data-trim data-line-numbers><context:annotation-config></context:annotation-config>
+<context:component-scan base-package="fr.cesi.controller"></context:component-scan>
+<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"></property>
+    <property name="prefix" value="/WEB-INF/jsp/"></property>
+    <property name="suffix" value=".jsp"></property>
+</bean></code></pre>
+            </section>
+            <section>
+                <div class="row">
+                    <div class="col">
+                        Un controleur est une classe Java surmontée de l'annotation @Controller
+                    </div>
+                    <div class="col">
+                        <pre><code data-trim data-line-numbers>@Controller
+public class MonControleur {
+   public String home() {
+      return "home";
+   }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="row">
+                    <div class="col">
+                        Sur chaque méthode est ajoutée une annotation pour spécifier quel type de requête HTTP doit
+                        être
+                        utilisée et quelle url
+                    </div>
+                </div>
+                <div class="row" data-id="code">
+                    <div class="col">
+                        <pre><code data-trim data-line-numbers>@Controller
+public class MonControleur {
+   @RequestMapping(method=RequestMethod.GET, path="/home")
+   public String home() {
+      return "home";
+   }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            <section>
+                Si la méthode retourne "home" alors le controleur utilisera le fichier home.jsp situé dans le
+                dossier
+                webapp/WEB-INF/jsp
+                <div class="row" data-id="code">
+                    <div class="col">
+                        <pre><code data-trim data-line-numbers>@Controller
+public class MonControleur {
+   @RequestMapping(method=RequestMethod.GET, path="/home")
+   public String home() {
+      return "home";
+   }
+}</code></pre>
+                    </div>
+                </div>
             </section>
         </section>
     </div>
