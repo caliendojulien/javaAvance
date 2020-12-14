@@ -351,6 +351,7 @@ requete.setParameter("nom", "Pikachu");
 Pokemon p = requete.getSingleResult();
                 </code></pre>
             </section>
+            <!--
             <section>
                 <div class="row">
                     <h4>TP</h4>
@@ -370,6 +371,7 @@ Pokemon p = requete.getSingleResult();
                 </div>
                 <hr>
             </section>
+            -->
             <section>
                 <h4>Relations et cardinalité</h4>
                 <div class="row justify-content-center align-items-center">
@@ -385,6 +387,7 @@ Pokemon p = requete.getSingleResult();
                     </div>
                 </div>
             </section>
+            <!--
             <section>
                 <div class="row">
                     <h4>TP</h4>
@@ -403,6 +406,7 @@ Pokemon p = requete.getSingleResult();
                 </div>
                 <hr>
             </section>
+            -->
         </section>
         <section>
             <section><h3>Spring ORM</h3></section>
@@ -493,6 +497,7 @@ public void ajouter(Pokemon p) {
                 <p class="fragment">Lorsqu'une méthode réalise un transaction SQL alors l'annotation @Transactional est
                     obligatoire</p>
             </section>
+            <!--
             <section>
                 <div class="row">
                     <h4>TP</h4>
@@ -510,8 +515,10 @@ public void ajouter(Pokemon p) {
                 </div>
                 <hr>
             </section>
+            -->
             <section>
-                <h4>Mieux encore, Spring Data permet <b class="fragment highlight-red">de ne plus écrire</b> les méthodes du CRUD et les méthodes les
+                <h4>Mieux encore, Spring Data permet <b class="fragment highlight-red">de ne plus écrire</b> les
+                    méthodes du CRUD et les méthodes les
                     plus utilisées d'une application classique</h4>
                 <pre class="fragment"><code>public class MonDAO extends JpaRepository&#x3008;Pokemon, Integer&#x3009;{
 }</code></pre>
