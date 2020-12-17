@@ -632,7 +632,7 @@ public class MonControleur {
             <section>
                 Si la méthode retourne "home" alors le controleur utilisera le fichier home.jsp situé dans le
                 dossier
-                webapp/WEB-INF/jsp
+                webapp/{prefix}
                 <div class="row" data-id="code">
                     <div class="col">
                         <pre><code data-trim data-line-numbers>@Controller
@@ -644,6 +644,41 @@ public class MonControleur {
 }</code></pre>
                     </div>
                 </div>
+            </section>
+            <section>
+                <h4>Modèle et formulaire</h4>
+                <pre><code data-trim data-line-numbers>@GetMapping("form")
+   public ModelAndView form() {
+      Pokemon p = new Pokemon();
+      return new ModelAndView("form", "Pokemon", p);
+   }
+</code> </pre>
+                <pre><code data-trim data-line-numbers><%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<form:form action="ajout" method="post" modelAttribute="Pokemon">
+<form:input type="text" path="nom"/>
+<button type="submit">Envoyer</button>
+</form:form>
+</code> </pre>
+            </section>
+            <section>
+                <h4>Validation</h4>
+                <pre><code>compile group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.1.6.Final'</code></pre>
+                <pre><code>@PostMapping("ajout")
+    public String ajoutEnPost(@Valid @ModelAttribute("Pokemon") Pokemon p, BindingResult resultat) {
+        System.out.println(resultat);
+        if (!resultat.hasErrors()) {
+            gp.ajout(p);
+            return "ajout";
+        }
+        return "form";
+    }</code></pre>
+            </section>
+            <section>
+                <ul>
+                    <li>@Min, @Max, @Digits, @Size</li>
+                    <li>@Null, @NotNull, @Past, @Future, @Pattern</li>
+                    <li>@CreditCardNumber, @Email, @NotEmpty, @NotBlank, @Url, @Range</li>
+                </ul>
             </section>
         </section>
     </div>
